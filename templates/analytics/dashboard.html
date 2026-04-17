@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-4xl font-bold text-center mb-10">
+    Analytics Dashboard 📊
+</h1>
+
+<div class="max-w-4xl mx-auto bg-gray-900 p-6 rounded-xl">
+
+    <table class="w-full text-left">
+
+        <tr class="text-blue-400">
+            <th>Path</th>
+            <th>IP</th>
+            <th>Time</th>
+        </tr>
+
+        {% for log in logs %}
+        <tr class="border-t border-gray-700">
+            <td>{{ log.path }}</td>
+            <td>{{ log.ip_address }}</td>
+            <td>{{ log.created_at }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+{% endblock %}
