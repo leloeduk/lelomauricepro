@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lelo Maurice - SaaS Platform</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+ 
+    </style>
+</head>
+
+<body class="bg-gray-950 text-white">
+
+<!-- NAVBAR -->
+<nav class="flex items-center justify-between px-8 py-5 glass">
+    <div class="text-xl font-bold">
+         Lelo Maurice
+    </div>
+
+    <div class="space-x-6 text-gray-300">
+        <a href="/" class="hover:text-white">Home</a>
+        <a href="/projects/" class="hover:text-white">Projects</a>
+        <a href="/skills/" class="hover:text-white">Skills</a>
+        <a href="/contact/" class="hover:text-white">Contact</a>
+    </div>
+
+    <div>
+        <a href="/admin/" class="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700">
+            Dashboard
+        </a>
+    </div>
+</nav>
+
+<!-- CONTENT -->
+<main class="px-8 py-12">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="text-center text-gray-500 py-10 mt-10">
+    © 2026 Lelo Maurice 
+</footer>
+
+</body>
+</html>
