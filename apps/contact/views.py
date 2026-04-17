@@ -38,3 +38,6 @@ Message:
         return redirect("/contact/success/")
 
     return render(request, "contact/contact.html")
+
+def contact_success(request):
+    return render(request, "contact/success.html")
