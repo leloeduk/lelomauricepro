@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-4xl font-bold text-center mb-10">
+    Contact Me 📩
+</h1>
+
+<div class="max-w-2xl mx-auto bg-gray-900 p-8 rounded-xl border border-gray-700">
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="name" placeholder="Your name"
+               class="w-full p-3 mb-4 bg-gray-800 rounded">
+
+        <input type="email" name="email" placeholder="Your email"
+               class="w-full p-3 mb-4 bg-gray-800 rounded">
+
+        <input type="text" name="subject" placeholder="Subject"
+               class="w-full p-3 mb-4 bg-gray-800 rounded">
+
+        <textarea name="message" placeholder="Message"
+                  class="w-full p-3 mb-4 bg-gray-800 rounded h-40"></textarea>
+
+        <button class="bg-blue-600 w-full p-3 rounded hover:bg-blue-700">
+            Send Message
+        </button>
+    </form>
+
+</div>
+
+{% endblock %}
