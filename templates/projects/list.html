@@ -1,45 +1,60 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Mes Projets | Lelo Maurice{% endblock %}
 
 {% block content %}
 
-<h1 class="text-4xl font-bold mb-10 text-center">
-    My Projects 🚀
-</h1>
+<!-- Hero section -->
+<section class="text-center py-12 md:py-16 bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-3xl mx-4 md:mx-8 animate-fade-in">
+    <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+        Mes Projets 
+    </h1>
+    <p class="text-gray-300 text-lg mt-4 max-w-2xl mx-auto">
+        Découvrez une sélection de réalisations web, mobile et IA.
+    </p>
+</section>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-    {% for project in projects %}
-
-    <div class="bg-gray-900 border border-gray-700 rounded-xl p-5 hover:scale-105 transition">
-
-        <h2 class="text-xl font-bold mb-2">
-            {{ project.title }}
-        </h2>
-
-        <p class="text-gray-400 mb-3">
-            {{ project.description|truncatechars:100 }}
-        </p>
-
-        <p class="text-sm text-blue-400 mb-3">
-            {{ project.tech_stack }}
-        </p>
-
-        <div class="flex justify-between text-sm">
-
-            {% if project.live_url %}
-            <a href="{{ project.live_url }}" class="text-green-400">Live</a>
-            {% endif %}
-
-            {% if project.github_url %}
-            <a href="{{ project.github_url }}" class="text-gray-400">GitHub</a>
-            {% endif %}
-
+<!-- Grille des projets -->
+<section class="mt-12 px-4 max-w-7xl mx-auto">
+    {% if projects %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {% for project in projects %}
+                <article class="group bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/20">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                    {% else %}
+                        <div class="w-full h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-gray-500">
+                             Aperçu
+                        </div>
+                    {% endif %}
+                    <div class="p-5">
+                        <h2 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition">{{ project.title }}</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-3">{{ project.description|truncatechars:120 }}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {% for tech in project.tech_stack|slice:":3" %}
+                                <span class="text-xs bg-gray-800 px-2.5 py-1 rounded-full text-blue-300 border border-gray-700">{{ tech }}</span>
+                            {% empty %}
+                                <span class="text-xs text-gray-500">{{ project.tech_stack }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="flex gap-4 text-sm">
+                            {% if project.live_url %}
+                                <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="text-green-400 hover:text-green-300 transition flex items-center gap-1">🌐 Live</a>
+                            {% endif %}
+                            {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition flex items-center gap-1"> GitHub</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
         </div>
-
-    </div>
-
-    {% endfor %}
-
-</div>
+    {% else %}
+        <div class="text-center py-16 bg-gray-900/30 rounded-2xl">
+            <p class="text-gray-400">Aucun projet à afficher pour le moment.</p>
+        </div>
+    {% endif %}
+</section>
 
 {% endblock %}
