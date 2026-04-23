@@ -17,14 +17,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key-change-me')
 
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.getenv(
-        "ALLOWED_HOSTS",
-        "localhost,127.0.0.1"
-    ).split(",")
-]
-
+ALLOWED_HOSTS = ["localhost", "127.0.0.1","lelomaurice.onrender.com"]
 
 # APPS
 INSTALLED_APPS = [
@@ -56,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'apps.analytics.middleware.AnalyticsMiddleware',
 ]
