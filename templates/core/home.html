@@ -2,11 +2,30 @@
 
 {% block content %}
 
+<!-- HERO HEADER -->
+<section class="text-center py-20 bg-gradient-to-r from-black to-gray-900 text-white">
+    
+    {% if header %}
+        <img src="{{ header.image.url }}" class="w-32 h-32 mx-auto rounded-full mb-4">
+
+        <h1 class="text-4xl font-bold">{{ header.title }}</h1>
+
+        <h2 class="text-xl text-gray-300 mt-2">
+            {{ header.subtitle }}
+        </h2>
+
+        <p class="max-w-2xl mx-auto mt-4 text-gray-400">
+            {{ header.description }}
+        </p>
+    {% endif %}
+
+</section>
+
 <!-- HERO -->
 <section class="text-center py-20">
 
     <h1 class="text-5xl font-bold mb-6">
-        Build Scalable SaaS Systems 🚀
+        Build Scalable SaaS Systems with Django & Flutter
     </h1>
 
     <p class="text-gray-400 text-lg mb-8">
@@ -49,7 +68,7 @@
 <section class="mt-20">
 
     <h2 class="text-3xl font-bold text-center mb-10">
-        Featured Projects 🚀
+        Featured Projects 
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -81,7 +100,7 @@
 <section class="mt-20">
 
     <h2 class="text-3xl font-bold text-center mb-10">
-        Skills ⚡
+        Skills 
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

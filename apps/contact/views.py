@@ -22,14 +22,12 @@ def contact_view(request):
 
         # SEND EMAIL
         send_mail(
-            subject=f"[Portfolio] {subject}",
+            subject=f"[MyPortfolio] {subject}",
             message=f"""
-Name: {name}
-Email: {email}
-
-Message:
-{message}
-""",
+              Name: {name}
+              Email: {email}
+              Message: {message}
+                """,
             from_email=email,
             recipient_list=["leloeduk2025@gmail.com"],
             fail_silently=False,
