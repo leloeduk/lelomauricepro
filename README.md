@@ -1,5 +1,7 @@
 # LeloMaurice - Portfolio Django
 
+le lien du cahier de charge : https://docs.google.com/document/d/1xVARwAPwePw5rOB9-UnNwxImFUKPzf0f/edit?usp=drive_link&ouid=115566819801026079981&rtpof=true&sd=true
+
 Un portfolio professionnel moderne construit avec Django 6, conçu pour présenter vos projets, compétences et services.
 
 ## 🚀 Fonctionnalités
