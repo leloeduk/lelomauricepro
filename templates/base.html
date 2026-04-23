@@ -1,56 +1,163 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Lelo Maurice - SaaS Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{% block title %}Lelo Maurice | SaaS Platform{% endblock %}</title>
 
-    <!-- Tailwind CDN -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <!-- Configuration Tailwind personnalisée (optionnel) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-    <!-- Custom CSS -->
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+    <!-- Votre CSS personnalisé -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
- 
+
+    <!-- Style additionnel pour la navbar glass -->
+    <style>
+        .glass-nav {
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-link {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .nav-link.active {
+            color: #60a5fa !important;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 0.5rem;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+        }
+        @media (max-width: 768px) {
+            .nav-link.active::after {
+                left: 0;
+                right: 0;
+            }
+        }
     </style>
+
+    {% block extra_head %}{% endblock %}
 </head>
 
-<body class="bg-gray-950 text-white">
+<body class="bg-gray-950 text-white font-sans antialiased">
 
-<!-- NAVBAR -->
-<nav class="flex items-center justify-between px-8 py-5 glass">
-    <div class="text-xl font-bold">
-         Lelo Maurice
-    </div>
+    <!-- ========== NAVBAR ========== -->
+    <nav class="glass-nav fixed top-0 w-full z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
 
-    <div class="space-x-6 text-gray-300">
-        <a href="/" class="hover:text-white">Home</a>
-        <a href="/projects/" class="hover:text-white">Projects</a>
-        <a href="/skills/" class="hover:text-white">Skills</a>
-        <a href="/contact/" class="hover:text-white">Contact</a>
-    </div>
+            <!-- Logo -->
+            <a href="/" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Lelo<span class="text-white">.</span>Maurice
+            </a>
 
-    <div>
-        <a href="/admin/" class="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700">
-            Dashboard
-        </a>
-    </div>
-</nav>
+            <!-- Liens desktop -->
+            <div class="hidden md:flex space-x-2">
+                {% with request.resolver_match.url_name as url_name %}
+                    <a href="{% url 'home' %}" class="nav-link px-4 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'home' or request.path == '/' %}active{% endif %}">Accueil</a>
+                    <a href="{% url 'projects' %}" class="nav-link px-4 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'projects' %}active{% endif %}">Projets</a>
+                    <a href="{% url 'skills' %}" class="nav-link px-4 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'skills' %}active{% endif %}">Compétences</a>
+                    <a href="{% url 'contact' %}" class="nav-link px-4 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'contact' %}active{% endif %}">Contact</a>
+                {% endwith %}
+            </div>
 
-<!-- CONTENT -->
-<main class="px-8 py-12">
-    {% block content %}
-    {% endblock %}
-</main>
+            <!-- Bouton Dashboard (admin) -->
+            <div class="hidden md:block">
+                <a href="{% url 'admin:index' %}" class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-blue-900/20">
+                    Dashboard
+                </a>
+            </div>
 
-<!-- FOOTER -->
-<footer class="text-center text-gray-500 py-10 mt-10">
-    © 2026 Lelo Maurice 
-</footer>
+            <!-- Bouton burger (mobile) -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
 
+        <!-- Menu mobile (caché par défaut) -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 bg-gray-900/90 backdrop-blur-md rounded-xl p-4 flex flex-col space-y-3 border border-gray-800">
+            {% with request.resolver_match.url_name as url_name %}
+                <a href="{% url 'home' %}" class="nav-link px-3 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'home' or request.path == '/' %}active{% endif %}">🏠 Accueil</a>
+                <a href="{% url 'projects' %}" class="nav-link px-3 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'projects' %}active{% endif %}">📁 Projets</a>
+                <a href="{% url 'skills' %}" class="nav-link px-3 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'skills' %}active{% endif %}">⚙️ Compétences</a>
+                <a href="{% url 'contact' %}" class="nav-link px-3 py-2 rounded-lg hover:bg-white/10 {% if url_name == 'contact' %}active{% endif %}">✉️ Contact</a>
+                <hr class="border-gray-700 my-2">
+                <a href="{% url 'admin:index' %}" class="px-3 py-2 bg-blue-600/20 text-blue-300 rounded-lg text-center">📊 Dashboard</a>
+            {% endwith %}
+        </div>
+    </nav>
+
+    <!-- Espace pour compenser la navbar fixe -->
+    <div class="h-20"></div>
+
+    <!-- Contenu principal -->
+    <main class="max-w-7xl mx-auto px-6 py-8 animate-fade-in">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="border-t border-gray-800 mt-20 py-10 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
+            <div>
+                © 2026 Lelo Maurice — Tous droits réservés
+            </div>
+            <div class="flex space-x-6">
+                <a href="https://github.com/leloeduk" class="hover:text-white transition">GitHub</a>
+                <a href="https://www.linkedin.com/in/lelo-maurice-714a72322/" class="hover:text-white transition">LinkedIn</a>
+                <a href="https://www.youtube.com/@LeloEduk" class="hover:text-white transition">Youtube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript pour le menu mobile -->
+    <script>
+        const btn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (btn && mobileMenu) {
+            btn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
