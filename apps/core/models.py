@@ -5,6 +5,8 @@ class SiteHeader(models.Model):
     subtitle = models.CharField(max_length=300)
     description = models.TextField()
     image = models.ImageField(upload_to='header/')
+    location = models.CharField(max_length=100, blank=True)
+    availability = models.CharField(max_length=100, blank=True)
 
     updated_at = models.DateTimeField(auto_now=True)
 
