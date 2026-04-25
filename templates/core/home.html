@@ -3,43 +3,127 @@
 {% block content %}
 
 <!-- HERO HEADER -->
-<section class="text-center py-20 bg-gradient-to-r from-black to-gray-900 text-white">
-    
+<section class="relative py-28 px-6 bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
+
     {% if header %}
-        <img src="{{ header.image.url }}" class="w-32 h-32 mx-auto rounded-full mb-4">
 
-        <h1 class="text-4xl font-bold">{{ header.title }}</h1>
+    <!-- Background glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-600 opacity-20 blur-[120px]"></div>
 
-        <h2 class="text-xl text-gray-300 mt-2">
+    <div class="relative max-w-5xl mx-auto text-center">
+
+        <!-- IMAGE (plus grande + premium) -->
+        <div class="mb-8">
+            <img src="{{ header.image.url }}"
+                 class="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full object-cover border border-gray-700 shadow-xl">
+        </div>
+
+        <!-- NAME -->
+        <h1 class="text-3xl md:text-5xl font-bold tracking-tight">
+            {{ header.title }}
+        </h1>
+
+        <!-- SUBTITLE -->
+        <p class="text-gray-400 text-lg mt-3">
             {{ header.subtitle }}
-        </h2>
+        </p>
 
-        <p class="max-w-2xl mx-auto mt-4 text-gray-400">
+        <!-- DESCRIPTION -->
+        <p class="max-w-2xl mx-auto mt-6 text-gray-500 text-sm leading-relaxed">
             {{ header.description }}
         </p>
+
+        <!-- STACK / VALUE -->
+        <div class="mt-6 flex justify-center flex-wrap gap-3 text-xs text-gray-400">
+            <span class="bg-gray-800 px-3 py-1 rounded-full">Django</span>
+            <span class="bg-gray-800 px-3 py-1 rounded-full">Flutter</span>
+            <span class="bg-gray-800 px-3 py-1 rounded-full">APIs</span>
+            <span class="bg-gray-800 px-3 py-1 rounded-full">SaaS</span>
+            <span class="bg-gray-800 px-3 py-1 rounded-full">AI</span>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-10 flex justify-center flex-wrap gap-4">
+
+            <a href="/projects/"
+               class="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition text-sm font-medium">
+                 View Projects
+            </a>
+
+            <a href="/contact/"
+               class="bg-gray-800 px-6 py-3 rounded-lg hover:bg-gray-700 transition text-sm font-medium">
+                 Contact Me
+            </a>
+
+        </div>
+
+        <!-- INFOS PERSO -->
+        <div class="mt-10 flex justify-center flex-wrap gap-6 text-gray-500 text-xs">
+
+            {% if header.location %}
+                <span>📍 {{ header.location }}</span>
+            {% endif %}
+
+            {% if header.availability %}
+                <span>💼 {{ header.availability }}</span>
+            {% endif %}
+
+            <span>🌍 Remote Friendly</span>
+
+        </div>
+
+    </div>
+
     {% endif %}
 
 </section>
 
 <!-- HERO -->
-<section class="text-center py-20">
+<section class="text-center py-20 px-6">
 
-    <h1 class="text-5xl font-bold mb-6">
-        Build Scalable SaaS Systems with Django & Flutter
+    <!-- Badge -->
+    <div class="inline-block mb-6">
+        <span class="bg-blue-600/20 text-blue-400 px-4 py-1 rounded-full text-sm">
+            Full Stack Developer • SaaS Builder
+        </span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        I Build Scalable SaaS Platforms <br>
+        with <span class="text-blue-500">Django</span> & <span class="text-blue-500">Flutter</span>
     </h1>
 
-    <p class="text-gray-400 text-lg mb-8">
-        Django • Flutter • DevOps • AI • APIs
+    <!-- Subtitle -->
+    <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-6">
+        I design and develop high-performance web and mobile applications,
+        focusing on scalability, clean architecture, and real-world impact.
     </p>
 
-    <div class="space-x-4">
-        <a href="/projects/" class="bg-blue-600 px-6 py-3 rounded-xl hover:bg-blue-700">
-            View Projects
+    <!-- Value -->
+    <p class="text-gray-500 text-sm max-w-xl mx-auto mb-10">
+        From backend APIs to mobile apps, I help startups and businesses
+        turn ideas into production-ready SaaS solutions.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex justify-center flex-wrap gap-4">
+
+        <a href="/projects/"
+           class="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+             View My Work
         </a>
 
-        <a href="/contact/" class="bg-gray-800 px-6 py-3 rounded-xl hover:bg-gray-700">
-            Contact Me
+        <a href="/contact/"
+           class="bg-gray-800 px-6 py-3 rounded-lg hover:bg-gray-700 transition">
+             Let's Talk
         </a>
+
+    </div>
+
+    <!-- Tech stack -->
+    <div class="mt-12 text-gray-500 text-sm">
+        Django • Flutter • PostgreSQL • Docker • APIs • AI Integration
     </div>
 
 </section>
@@ -63,31 +147,76 @@
     </div>
 
 </section>
-
 <!-- PROJECTS PREVIEW -->
-<section class="mt-20">
+<section class="mt-24 px-6">
 
-    <h2 class="text-3xl font-bold text-center mb-10">
-        Featured Projects 
-    </h2>
+    <!-- Title -->
+    <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">
+            Featured Projects
+        </h2>
+        <p class="text-gray-500 text-sm mt-3">
+            Some of the products and systems I’ve built
+        </p>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Grid -->
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
         {% for project in projects %}
 
-        <div class="bg-gray-900 border border-gray-700 p-5 rounded-xl">
+        <div class="group bg-gray-900/50 border border-gray-800 rounded-xl overflow-hidden hover:border-blue-500/40 transition duration-300">
 
-            <h3 class="text-xl font-bold mb-2">
-                {{ project.title }}
-            </h3>
+            <!-- IMAGE -->
+            {% if project.image %}
+                <img src="{{ project.image.url }}"
+                     class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+            {% else %}
+                <div class="w-full h-48 bg-gray-800 flex items-center justify-center text-gray-500 text-sm">
+                    No Image
+                </div>
+            {% endif %}
 
-            <p class="text-gray-400 text-sm mb-3">
-                {{ project.description|truncatechars:80 }}
-            </p>
+            <!-- CONTENT -->
+            <div class="p-5">
 
-            <p class="text-blue-400 text-sm">
-                {{ project.tech_stack }}
-            </p>
+                <!-- TITLE -->
+                <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-400 transition">
+                    {{ project.title }}
+                </h3>
+
+                <!-- DESCRIPTION -->
+                <p class="text-gray-400 text-sm mb-4">
+                    {{ project.description|truncatechars:100 }}
+                </p>
+
+                <!-- TECH -->
+                <p class="text-xs text-gray-500 mb-4">
+                    {{ project.tech_stack }}
+                </p>
+
+                <!-- LINKS -->
+                <div class="flex justify-between items-center text-sm">
+
+                    {% if project.live_url %}
+                        <a href="{{ project.live_url }}"
+                           target="_blank"
+                           class="text-blue-400 hover:underline">
+                            Live
+                        </a>
+                    {% endif %}
+
+                    {% if project.github_url %}
+                        <a href="{{ project.github_url }}"
+                           target="_blank"
+                           class="text-gray-400 hover:text-white">
+                            GitHub
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -97,23 +226,42 @@
 
 </section>
 <!-- SKILLS PREVIEW -->
-<section class="mt-20">
+<section class="mt-24 px-6">
 
-    <h2 class="text-3xl font-bold text-center mb-10">
-        Skills 
-    </h2>
+    <!-- Title -->
+    <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">
+            Skills & Technologies
+        </h2>
+        <p class="text-gray-500 mt-3 text-sm">
+            Tools and technologies I use to build scalable applications
+        </p>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Grid -->
+    <div class="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
 
         {% for skill in skills %}
 
-        <div class="bg-gray-900 border border-gray-700 p-5 rounded-xl text-center">
+        <div class="group bg-gray-900/50 border border-gray-800 p-6 rounded-xl text-center hover:border-blue-500/40 transition duration-300">
 
-            <h3 class="font-bold mb-2">{{ skill.name }}</h3>
+            <!-- ICON -->
+            {% if skill.icon %}
+                <img src="{{ skill.icon.url }}"
+                     class="w-12 h-12 mx-auto mb-4 object-contain group-hover:scale-110 transition">
+            {% else %}
+                <div class="w-12 h-12 mx-auto mb-4 bg-gray-800 rounded"></div>
+            {% endif %}
 
-            <div class="text-blue-400 text-xl font-bold">
-                {{ skill.level }}%
-            </div>
+            <!-- NAME -->
+            <h3 class="text-sm font-medium group-hover:text-blue-400 transition">
+                {{ skill.name }}
+            </h3>
+
+            <!-- CATEGORY -->
+            <p class="text-gray-500 text-xs mt-1">
+                {{ skill.category }}
+            </p>
 
         </div>
 
@@ -126,24 +274,110 @@
 <section class="mt-24 text-center">
 
     <h2 class="text-3xl font-bold mb-4">
-        Let’s Work Together 🚀
+        Let’s Work Together 
     </h2>
 
-    <p class="text-gray-400 mb-6">
+    <h3 class="text-gray-400 mb-6">
         Got a project or idea? Send me a message.
-    </p>
+    </h3>
 
-    <a href="/contact/"
-       class="bg-blue-600 px-6 py-3 rounded-xl hover:bg-blue-700">
-        Contact Me
-    </a>
+   
 
 </section>
+
+<!-- Hero contact -->
+<section class="text-center py-12 md:py-16 bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-3xl mx-4 md:mx-8 animate-fade-in">
+      <a href="/contact/">
+    <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+        Contactez-moi
+    </h1>
+        </a>
+    <p class="text-gray-300 text-lg mt-4 max-w-2xl mx-auto">
+        Une question, un projet ou une opportunité ? Écrivez-moi, je vous répondrai rapidement.
+    </p>
+    <div class="flex justify-center gap-4 mt-6 text-sm text-gray-400">
+        <span class="bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm"> leloeduk2025@gmail.com</span>
+        <span class="bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm"> +242 06 682 63 52</span>
+    </div>
+</section>
+
+<!-- Formulaire de contact + infos -->
+<section class="mt-12 px-4 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-8">
+        
+        <!-- Formulaire -->
+        <div class="bg-gray-900/40 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-gray-800 shadow-xl">
+            <h2 class="text-2xl font-bold mb-6 text-white">Envoyez-moi un message</h2>
+
+            <!-- Messages flash Django -->
+            {% if messages %}
+                <div class="mb-6 space-y-3">
+                    {% for message in messages %}
+                        <div class="p-3 rounded-xl text-sm backdrop-blur-sm 
+                            {% if message.tags == 'success' %}bg-green-900/50 border border-green-500 text-green-200
+                            {% elif message.tags == 'error' %}bg-red-900/50 border border-red-500 text-red-200
+                            {% else %}bg-gray-800/50 border border-gray-600 text-gray-200{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="POST" action="." novalidate>
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="name" placeholder="Nom complet" required
+                           class="w-full p-3 bg-gray-800/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    <input type="email" name="email" placeholder="Adresse email" required
+                           class="w-full p-3 bg-gray-800/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                </div>
+                <input type="text" name="subject" placeholder="Sujet" required
+                       class="w-full p-3 mt-4 bg-gray-800/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                <textarea name="message" placeholder="Votre message" required
+                          class="w-full p-3 mt-4 bg-gray-800/80 rounded-xl h-36 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"></textarea>
+                <button type="submit"
+                        class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 w-full mt-6 p-3 rounded-xl text-sm font-bold shadow-lg shadow-blue-900/30 transition-all duration-300 hover:scale-[1.01] disabled:opacity-50"
+                        id="submitBtn">
+                     Envoyer le message
+                </button>
+            </form>
+        </div>
+
+        <!-- Informations complémentaires -->
+        <div class="space-y-6">
+            <div class="bg-gray-900/40 backdrop-blur-sm p-6 rounded-2xl border border-gray-800">
+                <h3 class="text-xl font-semibold mb-4 flex items-center gap-2"> <span>Me trouver</span></h3>
+                <p class="text-gray-300 mb-2">Pointe-Noire, République du Congo</p>
+                <p class="text-gray-400 text-sm">Disponible pour des missions freelance et du remote dans le monde entier.</p>
+            </div>
+
+            <div class="bg-gray-900/40 backdrop-blur-sm p-6 rounded-2xl border border-gray-800">
+                <h3 class="text-xl font-semibold mb-4 flex items-center gap-2"> <span>Réseaux</span></h3>
+                <div class="flex flex-wrap gap-4">
+                               <a href="https://github.com/leloeduk" class="hover:text-white transition">GitHub</a>
+                <a href="https://www.linkedin.com/in/lelo-maurice-714a72322/" class="hover:text-white transition">LinkedIn</a>
+                <a href="https://www.youtube.com/@LeloEduk" class="hover:text-white transition">Youtube</a>
+                </div>
+            </div>
+
+            <div class="bg-gray-900/40 backdrop-blur-sm p-6 rounded-2xl border border-gray-800">
+                <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">⏱ <span>Disponibilité</span></h3>
+                <p class="text-gray-300">Actuellement disponible pour :</p>
+                <ul class="list-disc list-inside text-gray-400 text-sm mt-2 space-y-1">
+                    <li>Projets web complets (Django, React, Flutter)</li>
+                    <li>Intégration d’intelligence artificielle (chatbots, automatisation)</li>
+                    <li>Consulting et accompagnement technique</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- AI SECTION -->
 <section class="mt-24 text-center">
 
     <h2 class="text-3xl font-bold mb-4">
-        AI Assistant 🤖
+        AI Assistant 
     </h2>
 
     <p class="text-gray-400 mb-6">
